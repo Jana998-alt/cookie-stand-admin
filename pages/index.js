@@ -1,21 +1,24 @@
 import Head from 'next/head'
+import React, {useState} from 'react'
 
 export default function Home() {
+  const[cookies, setCookies]  = useState('')
 
-  function createCookiesHandler(event){
+  const createCookiesHandler = (event) => {
     event.preventDefault()
-    
-    let location = event.target.location.value
-    let min = event.target.min.value
-    let max = event.target.max.value
-    let avg = event.target.avg.value
-
-    return JSON.stringify(location, min, max, avg)
+    const cookiesInfo = {
+      location: event.target.location.value,
+      min: event.target.min.value,
+      max: event.target.max.value,
+      avg: event.target.avg.value,
+    }
+    console.log(`${(JSON.stringify(cookiesInfo))}`);
+    setCookies(`${(JSON.stringify(cookiesInfo))}`)
 
   }
 
   return (
-    <div>
+    <div className="bg-emerald-100">
       <Head>
         <title>Cookie Stand Admin</title>      
       </Head>
@@ -57,9 +60,13 @@ export default function Home() {
 
         </form>
 
+        <div class="w-2/3 p-4 flex-auto mx-auto" >
+          <p>{cookies}</p>
+        </div>
+
       </main>
 
-      <footer className="flex bg-emerald-400">
+      <footer className="absolute bottom-0 w-full bg-emerald-400">
         <p>2021</p>
       </footer>
     </div>
