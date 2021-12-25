@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
-import Head from '../components/Head.js'
+import {useState} from 'react'
+import IndexPage from './IndexPage.js'
 import Footer from '../components/Footer.js'
+import Header2 from './Header2.js'
+import Main from './Main.js'
 
-export default function CookieStandAdmin(props) {
+export default function CookieStandAdmin() {
 
-    const potato = "kjbiubu"
+    const[cookies, setCookies]  = useState('')
+
+    const createCookiesHandler = (event) => {
+      event.preventDefault()
+      const cookiesInfo = {
+        location: event.target.location.value,
+        min: event.target.min.value,
+        max: event.target.max.value,
+        avg: event.target.avg.value,
+      }
+      console.log(`${(JSON.stringify(cookiesInfo))}`);
+      setCookies(`${(JSON.stringify(cookiesInfo))}`)
+  
+    }
 
         return (
-            <>
-            <h1>Cookie stand admin</h1>
-            {/* <h2>{props.tomato}</h2> */}
-                {/* <Head/>
-                <Footer potato = {potato}/> 
-                <Header/>
-
-                <Main/>
-                <CreateForm/>
-                <ReportTable/>
-                
-                <Footer/> */}
-
+            <>   
+            <IndexPage/>
+            <Main createCookiesHandler={createCookiesHandler} cookies={cookies}/>
+            <Header2/>
+            <Footer/>
             </>
         )
 }
@@ -27,4 +35,9 @@ export default function CookieStandAdmin(props) {
 
 
 
+                // {/* <Main/>
+                // <CreateForm/>
+                // <ReportTable/>
+                
+                // <Footer/> */}
 // export default CookieStandAdmin

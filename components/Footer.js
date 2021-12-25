@@ -4,7 +4,7 @@ export default function Footer(props){
 
     return (
         <footer className="absolute bottom-0 w-full bg-emerald-400">
-            <p>2021 {props.potato}</p>
+            <p>2021</p>
         </footer>
     )
 

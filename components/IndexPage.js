@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import Head from 'next/head'
 
-export default function Head(props){
+export default function IndexPage(){
 
         return (
             <Head>
