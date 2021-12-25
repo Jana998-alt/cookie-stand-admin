@@ -25,8 +25,9 @@ export default function CookieStandAdmin() {
         return (
             <>   
             <IndexPage/>
-            <Main createCookiesHandler={createCookiesHandler} cookies={cookies}/>
             <Header2/>
+            <Main createCookiesHandler={createCookiesHandler} cookies={cookies}/>
+
             <Footer/>
             </>
         )
