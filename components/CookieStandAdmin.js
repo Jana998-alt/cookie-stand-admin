@@ -4,10 +4,12 @@ import IndexPage from './IndexPage.js'
 import Footer from '../components/Footer.js'
 import Header2 from './Header2.js'
 import Main from './Main.js'
+import ReportTable from './ReportTable.js'
 
 export default function CookieStandAdmin() {
 
-    const[cookies, setCookies]  = useState('')
+    const[cookies, setCookies]  = useState([])
+
 
     const createCookiesHandler = (event) => {
       event.preventDefault()
@@ -16,17 +18,23 @@ export default function CookieStandAdmin() {
         min: event.target.min.value,
         max: event.target.max.value,
         avg: event.target.avg.value,
+        hourly_sales:[48, 42, 30, 24, 42, 24, 36, 42, 42, 48, 36, 42, 24, 36]
       }
-      console.log(`${(JSON.stringify(cookiesInfo))}`);
-      setCookies(`${(JSON.stringify(cookiesInfo))}`)
+
+
+      
+      setCookies(x => [...x, cookiesInfo])
+      console.log(cookies);
   
     }
+    
 
         return (
             <>   
             <IndexPage/>
             <Header2/>
             <Main createCookiesHandler={createCookiesHandler} cookies={cookies}/>
+            <ReportTable cookies = {cookies}/>
 
             <Footer/>
             </>

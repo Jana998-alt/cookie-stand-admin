@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function CreateForm(props) {
+
+
+
     return (
         <div>
              <form type="submit" className="bg-emerald-300 text-xs w-2/3 mx-auto p-4" onSubmit={props.createCookiesHandler}>

@@ -7,7 +7,7 @@ export default function Main(props) {
         <main className="bg-emerald-100">
             <CreateForm createCookiesHandler={props.createCookiesHandler} cookies={props.cookies}/>
             <div class="w-2/3 p-4 flex-auto mx-auto" >
-                <p>{props.cookies}</p>
+                <p></p>
             </div>
 
         </main>
