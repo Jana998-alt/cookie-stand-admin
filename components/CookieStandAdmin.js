@@ -10,6 +10,7 @@ export default function CookieStandAdmin() {
 
     const[cookies, setCookies]  = useState([])
 
+    console.log(cookies);
 
     const createCookiesHandler = (event) => {
       event.preventDefault()
@@ -36,7 +37,7 @@ export default function CookieStandAdmin() {
             <Main createCookiesHandler={createCookiesHandler} cookies={cookies}/>
             <ReportTable cookies = {cookies}/>
 
-            <Footer/>
+            <Footer cookies = {cookies}/>
             </>
         )
 }

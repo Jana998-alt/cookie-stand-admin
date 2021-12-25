@@ -3,45 +3,30 @@ import { hours } from './data'
 
 export default function ReportTable(props) {
 
-    // const [reports, setReports] = useState(None)
-
-    // const setReports = (event) => {
-
-    //     table = <></>
-
-    //     for (let i = 0; i < hours.length; i++) {
-    //         props.cookies.hourly_sales.map(cell => {
-    //             return (
-    //                 <td>cell</td>
-    //             )
-    //         }
-    //         )
-    //     }
-    // }
-
+    const even = true
     const totals = []
     for (let i = 0; i < hours.length; i++) {
         totals.push(0)
     }
 
     props.cookies.map((cookie, index) => {
-        for(let i = 0; i < hours.length; i++){
+        for (let i = 0; i < hours.length; i++) {
             totals[i] = totals[i] + cookie.hourly_sales[i]
         }
     })
     console.log(totals);
 
-    if (props.cookies == []) {
-        return <h2 className="mt-4 md:text-2xl">No Cookie Stands Available</h2>
+    if (props.cookies.length == 0) {
+        return <h2 className="mt-4 md:text-2xl align-middle">No Cookie Stands Available</h2>
     }
 
 
 
     else {
         return (
-            <table>
+            <table className="border-collapse border-black bg-emerald-300 text-xs w-2/3 mx-auto p-4 border">
 
-                <thead>
+                <thead className='bg-emerald-500'>
 
                     <td></td>
                     {hours.map(hour =>
@@ -53,25 +38,41 @@ export default function ReportTable(props) {
 
                 {
                     props.cookies.map(cookie => {
-                        return (
-                            <tr>
-                                <th>{cookie.location}</th>
-                                {cookie.hourly_sales.map(hour_sales => {
-                                    return (<td>{hour_sales}</td>)
-                                })}
+                        if (even) {
+                            even = false
+                            return (
+                                <tr className='border border-gray-700'>
+                                    <td>{cookie.location}</td>
+                                    {cookie.hourly_sales.map(hour_sales => {
+                                        return (<td className='border border-gray-700'>{hour_sales}</td>)
+                                    })}
 
-                            </tr>)
+                                </tr>)
+            
+                        }
+                        else{
+                            even = true
+                            return (
+                                <tr>
+                                    <td className='bg-emerald-100 border border-gray-700'>{cookie.location}</td>
+                                    {cookie.hourly_sales.map(hour_sales => {
+                                        return (<td  className='bg-emerald-100 border border-gray-700'>{hour_sales}</td>)
+                                    })}
+
+                                </tr>)
+                        }
+
                     })
                 }
 
                 {
-                    <tr>
+                    <tr className='bg-emerald-500'>
                         <td></td>
                         {
 
                             totals.map(total => {
-                                return(
-                                    <td>{total}</td>
+                                return (
+                                    <td className='border border-gray-700'>{total}</td>
                                 )
                             })
 
