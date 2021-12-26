@@ -1,74 +1,44 @@
-import Head from 'next/head'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import CookieStandAdmin from '../components/CookieStandAdmin.js'
+import LoginForm from '../components/LoginForm.js'
+import Footer from '../components/Footer.js'
+import axios from 'axios'
+
+
+
+
+const tokenUrl = 'http://127.0.0.1:8000/api/token/';
+const refreshToken = 'http://127.0.0.1:8000/api/token/refresh/';
+
+
 
 export default function Home() {
-  const[cookies, setCookies]  = useState('')
 
-  const createCookiesHandler = (event) => {
-    event.preventDefault()
-    const cookiesInfo = {
-      location: event.target.location.value,
-      min: event.target.min.value,
-      max: event.target.max.value,
-      avg: event.target.avg.value,
-    }
-    console.log(`${(JSON.stringify(cookiesInfo))}`);
-    setCookies(`${(JSON.stringify(cookiesInfo))}`)
+  const [token, setToken] = useState("")
+  const [refreshToken, setRefreshToken] = useState("")
 
+  async function getToken(userCredentials) {
+    const token_recieved = await axios.post(tokenUrl, userCredentials)
+
+    setToken(token_recieved.data.access)
+    setRefreshToken(token_recieved.data.refresh)
   }
 
-  return (
-    <div className="bg-emerald-100">
-      <Head>
-        <title>Cookie Stand Admin</title>      
-      </Head>
-      <header className="flex bg-emerald-500 text-6xl">
-        <h1>Cookie Stand Admin</h1> 
-      </header>
+  if (token === "") {
+    return (
 
-      <main className="bg-emerald-100">
+      <LoginForm getToken={getToken}/>
 
-        <form type="submit" className="bg-emerald-300 text-xs w-2/3 mx-auto p-4" onSubmit={createCookiesHandler}>
-          <h2>Create Cookie Stand</h2>
-          <br/>
-          <div className="flex-auto w-full">
-          <label>location</label>
-          <input type = "text" className="flex-auto w-full" name='location'></input>
-          </div>
+    )
+  }
 
-          <div className="flex ">
-            <div className="p-4">
-            <label>Minimum Customers Per Hour</label>
-            <br/>
-            <input type = "number" className="flex-auto" name='min'></input>
-            </div>
 
-            <div className="p-4">
-            <label>Maximum Customers Per Hour</label>
-            <br/>
-            <input type = "number" className="flex-auto" name='max'></input>
-            </div>
+  else {
+    return (
 
-            <div className="p-4">            
-            <label>Average Cookies Per Sale</label>
-            <br/>
-            <input type = "number" className="flex-auto" name='avg' step="any"></input>
-            </div>
+      <CookieStandAdmin />
 
-            <button className="p-4 bg-emerald-400 w-1/4">Create</button>
-          </div>
+    )
+  }
 
-        </form>
-
-        <div class="w-2/3 p-4 flex-auto mx-auto" >
-          <p>{cookies}</p>
-        </div>
-
-      </main>
-
-      <footer className="absolute bottom-0 w-full bg-emerald-400">
-        <p>2021</p>
-      </footer>
-    </div>
-  )
 }
