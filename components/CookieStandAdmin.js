@@ -5,6 +5,7 @@ import Footer from '../components/Footer.js'
 import Header2 from './Header2.js'
 import Main from './Main.js'
 import ReportTable from './ReportTable.js'
+import { hours } from './data.js'
 
 export default function CookieStandAdmin() {
 
@@ -19,13 +20,26 @@ export default function CookieStandAdmin() {
         min: event.target.min.value,
         max: event.target.max.value,
         avg: event.target.avg.value,
-        hourly_sales:[48, 42, 30, 24, 42, 24, 36, 42, 42, 48, 36, 42, 24, 36]
+        hourly_sales:[],
+        total_sales: "",
       }
-
-
       
+      const randCust = []
+      const cookiesPurches = []
+      const total = 0
+
+      for (let i = 0; i < hours.length; i++) {
+        const customer = Math.floor(Math.random() * (Math.floor(~cookiesInfo.max) - Math.ceil(~cookiesInfo.min) + 1) - Math.ceil(~cookiesInfo.max))
+        randCust.push(customer)
+        const sales = Math.ceil(customer * cookiesInfo.avg)
+        cookiesPurches.push(sales)
+        total = total +  customer
+        
+      }
+      cookiesInfo.hourly_sales = cookiesPurches
+      cookiesInfo.total_sales = total
+  
       setCookies(x => [...x, cookiesInfo])
-      console.log(cookies);
   
     }
     

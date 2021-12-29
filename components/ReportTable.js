@@ -14,7 +14,11 @@ export default function ReportTable(props) {
             totals[i] = totals[i] + cookie.hourly_sales[i]
         }
     })
-    console.log(totals);
+
+    const totalOfTotals = 0
+    for(let i = 0; i< totals.length; i++){
+        totalOfTotals += totals[i]
+    }
 
     if (props.cookies.length == 0) {
         return <h2 className="mt-4 md:text-2xl align-middle">No Cookie Stands Available</h2>
@@ -46,7 +50,7 @@ export default function ReportTable(props) {
                                     {cookie.hourly_sales.map(hour_sales => {
                                         return (<td className='border border-gray-700'>{hour_sales}</td>)
                                     })}
-
+                                    <td className='border border-gray-700'>{cookie.total_sales}</td>
                                 </tr>)
             
                         }
@@ -58,7 +62,7 @@ export default function ReportTable(props) {
                                     {cookie.hourly_sales.map(hour_sales => {
                                         return (<td  className='bg-emerald-100 border border-gray-700'>{hour_sales}</td>)
                                     })}
-
+                                    <td className='border border-gray-700'>{cookie.total_sales}</td>
                                 </tr>)
                         }
 
@@ -67,7 +71,7 @@ export default function ReportTable(props) {
 
                 {
                     <tr className='bg-emerald-500'>
-                        <td></td>
+                        <td>Totals</td>
                         {
 
                             totals.map(total => {
@@ -77,7 +81,7 @@ export default function ReportTable(props) {
                             })
 
                         }
-
+                    <td className='border border-gray-700'>{totalOfTotals}</td>
                     </tr>
                 }
 
