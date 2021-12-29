@@ -14,7 +14,6 @@ export default function ReportTable(props) {
             totals[i] = totals[i] + cookie.hourly_sales[i]
         }
     })
-    console.log(totals);
 
     if (props.cookies.length == 0) {
         return <h2 className="mt-4 md:text-2xl align-middle">No Cookie Stands Available</h2>
