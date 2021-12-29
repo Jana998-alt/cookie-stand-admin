@@ -20,22 +20,24 @@ export default function CookieStandAdmin() {
         min: event.target.min.value,
         max: event.target.max.value,
         avg: event.target.avg.value,
-        hourly_sales:[]
+        hourly_sales:[],
+        total_sales: "",
       }
       
       const randCust = []
       const cookiesPurches = []
+      const total = 0
 
       for (let i = 0; i < hours.length; i++) {
         const customer = Math.floor(Math.random() * (Math.floor(~cookiesInfo.max) - Math.ceil(~cookiesInfo.min) + 1) - Math.ceil(~cookiesInfo.max))
         randCust.push(customer)
         const sales = Math.ceil(customer * cookiesInfo.avg)
         cookiesPurches.push(sales)
+        total = total +  customer
         
       }
-      console.log(randCust);
-      console.log(cookiesPurches);
       cookiesInfo.hourly_sales = cookiesPurches
+      cookiesInfo.total_sales = total
   
       setCookies(x => [...x, cookiesInfo])
   
