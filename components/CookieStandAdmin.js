@@ -25,17 +25,14 @@ export default function CookieStandAdmin(props) {
       total_sales: "",
     }
 
-
-
-    randomHourly = randomHourlySales(cookiesInfo.min,cookiesInfo.max,cookiesInfo.avg)
+    randomHourly = randomHourlySales(cookiesInfo.min, cookiesInfo.max, cookiesInfo.avg)
     cookiesInfo.hourly_sales = randomHourly.randCust
     cookiesInfo.total_sales = randomHourly.total
 
     setCookies(x => [...x, cookiesInfo])
-
   }
-
-  function randomHourlySales(min,max,avg){
+  // function to calculate hourly sales for a new location
+  function randomHourlySales(min, max, avg) {
     const randCust = []
     const cookiesPurches = []
     const total = 0
@@ -47,9 +44,9 @@ export default function CookieStandAdmin(props) {
       cookiesPurches.push(sales)
       total = total + customer
     }
-    const returnObject = {cookiesPurches:cookiesPurches, total_sales:total, randCust: randCust}
+    const returnObject = { cookiesPurches: cookiesPurches, total_sales: total, randCust: randCust }
     return returnObject
-    
+
   }
 
 
@@ -57,14 +54,29 @@ export default function CookieStandAdmin(props) {
   async function cookiesFromAPI() {
     const credintials = { headers: { 'Authorization': 'Bearer ' + props.token } };
     const cookiesInfofromAPI = await axios.get('http://localhost:8000/api/v1/cookie_stands/', credintials)
-    console.log(cookiesInfofromAPI.data)
+    await setCookies(cookiesInfofromAPI.data)
   }
   cookiesFromAPI()
+
 
   // post new location to API
   async function postCookiesToAPIHandler(event) {
     event.preventDefault()
-    const data= {
+    // to render an empty row before getting data
+    const newRow = {
+      "location": '',
+      "hourly_sales": [],
+      "minimum_customers_per_hour": event.target.min.value,
+      "maximum_customers_per_hour": event.target.max.value,
+      "average_cookies_per_sale": event.target.avg.value,
+      "owner": null
+    }
+    const randomHourly = randomHourlySales(-1, -1, 0)
+    newRow.hourly_sales = randomHourly.randCust
+    setCookies(x => [...x, newRow])
+
+    // save of new location before sending
+    const data = {
       "location": event.target.location.value,
       "hourly_sales": [],
       "minimum_customers_per_hour": event.target.min.value,
@@ -72,8 +84,7 @@ export default function CookieStandAdmin(props) {
       "average_cookies_per_sale": event.target.avg.value,
       "owner": null
     }
-    const randomHourly = randomHourlySales(data.minimum_customers_per_hour, data.maximum_customers_per_hour, data.average_cookies_per_sale)
-    console.log(randomHourly);
+    randomHourly = randomHourlySales(data.minimum_customers_per_hour, data.maximum_customers_per_hour, data.average_cookies_per_sale)
     data.hourly_sales = randomHourly.randCust
     const total_sales_per_location = randomHourly.total
 
@@ -87,9 +98,17 @@ export default function CookieStandAdmin(props) {
   }
 
   // delete location from API
-  // const deleteCookiesFromAPIHandler = (event) => {
-  //   event.preventDefault()
-  // }
+  async function deleteCookiesFromAPIHandler(event, id){
+    event.preventDefault()
+    const credintials = {
+      headers: { 'Authorization': 'Bearer ' + props.token },
+
+    };
+    const cookiesInfofromAPI = await axios.delete('http://localhost:8000/api/v1/cookie_stands/'+id, credintials)
+    cookiesFromAPI()
+    await console.log(cookiesInfofromAPI);
+    
+  }
 
 
   return (
@@ -97,7 +116,7 @@ export default function CookieStandAdmin(props) {
       <IndexPage />
       <Header2 />
       <Main createCookiesHandler={createCookiesHandler} cookies={cookies} postCookiesToAPIHandler={postCookiesToAPIHandler} />
-      <ReportTable cookies={cookies} />
+      <ReportTable deleteCookiesFromAPIHandler = {deleteCookiesFromAPIHandler} cookies={cookies} />
 
       <Footer cookies={cookies} />
     </>
