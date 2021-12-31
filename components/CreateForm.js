@@ -6,7 +6,7 @@ export default function CreateForm(props) {
 
     return (
         <div>
-             <form type="submit" className="bg-emerald-300 text-xs w-2/3 mx-auto p-4" onSubmit={props.createCookiesHandler}>
+             <form type="submit" className="bg-emerald-300 text-xs w-2/3 mx-auto p-4" onSubmit={props.postCookiesToAPIHandler}>
                 <h2>Create Cookie Stand</h2>
                 <br />
                 <div className="flex-auto w-full ">
