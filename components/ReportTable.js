@@ -3,6 +3,8 @@ import { hours } from './data'
 
 export default function ReportTable(props) {
 
+    const total = 0 
+
     const even = true
     const totals = []
     for (let i = 0; i < hours.length; i++) {
@@ -39,30 +41,35 @@ export default function ReportTable(props) {
 
                 </thead>
 
-
+                
                 {
                     props.cookies.map(cookie => {
+                        total = 0 
                         if (even) {
                             even = false
+                            
                             return (
                                 <tr className='border border-gray-700'>
-                                    <td>{cookie.location}</td>
+                                    <td className='flex'>{cookie.location}<img src="https://cdn2.iconfinder.com/data/icons/thin-line-color-1/21/33-512.png" width= "20" onClick={(event) => props.deleteCookiesFromAPIHandler(event, cookie.id)} ></img></td>
                                     {cookie.hourly_sales.map(hour_sales => {
+                                        total = total + hour_sales
                                         return (<td className='border border-gray-700'>{hour_sales}</td>)
                                     })}
-                                    <td className='border border-gray-700'>{cookie.total_sales}</td>
+                                    <td className='border border-gray-700'>{total}</td>
                                 </tr>)
             
                         }
                         else{
                             even = true
+                            total = 0
                             return (
                                 <tr>
-                                    <td className='bg-emerald-100 border border-gray-700'>{cookie.location}</td>
+                                    <td className='bg-emerald-100 border flex'>{cookie.location}<img src="https://cdn2.iconfinder.com/data/icons/thin-line-color-1/21/33-512.png" width= "20" onClick={props.deleteCookiesFromAPIHandler}></img></td>
                                     {cookie.hourly_sales.map(hour_sales => {
+                                        total = total + hour_sales
                                         return (<td  className='bg-emerald-100 border border-gray-700'>{hour_sales}</td>)
                                     })}
-                                    <td className='border border-gray-700'>{cookie.total_sales}</td>
+                                    <td className='border border-gray-700'>{total}</td>
                                 </tr>)
                         }
 

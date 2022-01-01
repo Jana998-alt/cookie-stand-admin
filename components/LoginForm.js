@@ -20,14 +20,14 @@ export default function LoginForm(props) {
     }
 
     function usernameChangeHandler(event){
-        username = event.target.value
+        const username = event.target.value
         credentials.username = username 
         setuserCredentials(userCredentials)
         console.log(credentials);
     }
 
     function passwordChangeHandler(event){
-        password = event.target.value
+        const password = event.target.value
         credentials.password = password 
         setuserCredentials(userCredentials)
         console.log(credentials);

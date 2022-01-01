@@ -36,7 +36,7 @@ export default function Home() {
   else {
     return (
 
-      <CookieStandAdmin />
+      <CookieStandAdmin token = {token}/>
 
     )
   }
