@@ -8,9 +8,11 @@ import ReportTable from './ReportTable.js'
 import { hours } from './data.js'
 import axios from 'axios'
 
-const cookiesInfoURL = 'http://localhost:8000/api/v1/cookie_stands/'
+
 
 export default function CookieStandAdmin(props) {
+
+  const cookiesInfoURL = props.url + '/api/v1/cookie_stands/'
 
   const [cookies, setCookies] = useState([])
 
@@ -53,7 +55,7 @@ export default function CookieStandAdmin(props) {
   // get cookie stands from API
   async function cookiesFromAPI() {
     const credintials = { headers: { 'Authorization': 'Bearer ' + props.token } };
-    const cookiesInfofromAPI = await axios.get('http://localhost:8000/api/v1/cookie_stands/', credintials)
+    const cookiesInfofromAPI = await axios.get(props.url + '/api/v1/cookie_stands/', credintials)
     await setCookies(cookiesInfofromAPI.data)
   }
   cookiesFromAPI()
@@ -93,7 +95,7 @@ export default function CookieStandAdmin(props) {
 
     };
 
-    const cookiesInfofromAPI = await axios.post('http://localhost:8000/api/v1/cookie_stands/', data, credintials)
+    const cookiesInfofromAPI = await axios.post(props.url + '/api/v1/cookie_stands/', data, credintials)
     return cookiesFromAPI
   }
 
@@ -104,7 +106,7 @@ export default function CookieStandAdmin(props) {
       headers: { 'Authorization': 'Bearer ' + props.token },
 
     };
-    const cookiesInfofromAPI = await axios.delete('http://localhost:8000/api/v1/cookie_stands/'+id, credintials)
+    const cookiesInfofromAPI = await axios.delete(props.url + '/api/v1/cookie_stands/'+id, credintials)
     cookiesFromAPI()
     await console.log(cookiesInfofromAPI);
     
