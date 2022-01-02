@@ -7,9 +7,9 @@ import next from 'next'
 
 export default function Home() {
 
-  const dburl = process.env.DBHOST
-  const tokenUrl = dburl + '/api/token/';
-  const refreshTokenUrl = dburl + '/api/token/refresh/'; 
+  const dburl = process.env.NEXT_PUBLIC_COOKIE_STAND_API
+  const tokenUrl = dburl + 'api/token/';
+  const refreshTokenUrl = dburl + 'api/token/refresh/'; 
 
   const [token, setToken] = useState("")
   const [refreshToken, setRefreshToken] = useState("")
