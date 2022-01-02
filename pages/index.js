@@ -8,8 +8,8 @@ import next from 'next'
 export default function Home() {
 
   const url = process.env.DBHOST
-  const tokenUrl = url + '/api/token/';
-  const refreshTokenUrl = url + '/api/token/refresh/'; 
+  const tokenUrl = dburl + '/api/token/';
+  const refreshTokenUrl = dburl + '/api/token/refresh/'; 
 
   const [token, setToken] = useState("")
   const [refreshToken, setRefreshToken] = useState("")
@@ -35,7 +35,7 @@ export default function Home() {
   else {
     return (
 
-      <CookieStandAdmin token = {token} url = {url}/>
+      <CookieStandAdmin token = {token} dburl = {dburl}/>
 
     )
   }
