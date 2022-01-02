@@ -3,25 +3,24 @@ import CookieStandAdmin from '../components/CookieStandAdmin.js'
 import LoginForm from '../components/LoginForm.js'
 import Footer from '../components/Footer.js'
 import axios from 'axios'
-
-
-
-
-const tokenUrl = 'http://127.0.0.1:8000/api/token/';
-const refreshToken = 'http://127.0.0.1:8000/api/token/refresh/';
-
-
+import next from 'next'
 
 export default function Home() {
+
+  const url = process.env.DBHOST
+  const tokenUrl = url + '/api/token/';
+  const refreshTokenUrl = url + '/api/token/refresh/'; 
 
   const [token, setToken] = useState("")
   const [refreshToken, setRefreshToken] = useState("")
 
   async function getToken(userCredentials) {
+
     const token_recieved = await axios.post(tokenUrl, userCredentials)
 
     setToken(token_recieved.data.access)
     setRefreshToken(token_recieved.data.refresh)
+    
   }
 
   if (token === "") {
@@ -36,7 +35,7 @@ export default function Home() {
   else {
     return (
 
-      <CookieStandAdmin token = {token}/>
+      <CookieStandAdmin token = {token} url = {url}/>
 
     )
   }

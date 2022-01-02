@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 export default function LoginForm(props) {
 
+
     const credentials = {
         username: "",
         password: "",
@@ -15,7 +16,6 @@ export default function LoginForm(props) {
 
         event.preventDefault()
         props.getToken(userCredentials)
-        console.log("login");
 
     }
 
@@ -23,21 +23,19 @@ export default function LoginForm(props) {
         const username = event.target.value
         credentials.username = username
         setuserCredentials(userCredentials)
-        console.log(credentials);
     }
 
     function passwordChangeHandler(event) {
         const password = event.target.value
         credentials.password = password
         setuserCredentials(userCredentials)
-        console.log(credentials);
 
     }
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="flex flex-col items-center justify-center flex-1 w-full px-20 text-center">
-            <form className="grid grid-rows-3 gap-4 bg-green-300 rounded-md" onSubmit={submitHandler}>
+            <form className="grid grid-rows-3 gap-4 bg-green-300 rounded-md" onSubmit={submitHandler} method='POST'>
 
                 <div className='grid w-50'>
                     <label className="mr-3 font-semibold text-black-50" htmlFor="username">User Name</label>
