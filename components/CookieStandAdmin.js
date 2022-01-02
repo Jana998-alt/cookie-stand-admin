@@ -12,7 +12,7 @@ import axios from 'axios'
 
 export default function CookieStandAdmin(props) {
 
-  const cookiesInfoURL = props.url + '/api/v1/cookie_stands/'
+  const cookiesInfoURL = props.dburl + '/api/v1/cookie_stands/'
 
   const [cookies, setCookies] = useState([])
 
@@ -55,7 +55,7 @@ export default function CookieStandAdmin(props) {
   // get cookie stands from API
   async function cookiesFromAPI() {
     const credintials = { headers: { 'Authorization': 'Bearer ' + props.token } };
-    const cookiesInfofromAPI = await axios.get(props.url + '/api/v1/cookie_stands/', credintials)
+    const cookiesInfofromAPI = await axios.get(props.dburl + '/api/v1/cookie_stands/', credintials)
     await setCookies(cookiesInfofromAPI.data)
   }
   cookiesFromAPI()
@@ -95,7 +95,7 @@ export default function CookieStandAdmin(props) {
 
     };
 
-    const cookiesInfofromAPI = await axios.post(props.url + '/api/v1/cookie_stands/', data, credintials)
+    const cookiesInfofromAPI = await axios.post(props.dburl + '/api/v1/cookie_stands/', data, credintials)
     return cookiesFromAPI
   }
 
@@ -106,7 +106,7 @@ export default function CookieStandAdmin(props) {
       headers: { 'Authorization': 'Bearer ' + props.token },
 
     };
-    const cookiesInfofromAPI = await axios.delete(props.url + '/api/v1/cookie_stands/'+id, credintials)
+    const cookiesInfofromAPI = await axios.delete(props.dburl + '/api/v1/cookie_stands/'+id, credintials)
     cookiesFromAPI()
     await console.log(cookiesInfofromAPI);
     
