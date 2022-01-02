@@ -7,7 +7,7 @@ import next from 'next'
 
 export default function Home() {
 
-  const url = process.env.DBHOST
+  const dburl = process.env.DBHOST
   const tokenUrl = dburl + '/api/token/';
   const refreshTokenUrl = dburl + '/api/token/refresh/'; 
 
