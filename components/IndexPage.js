@@ -8,8 +8,6 @@ export default function IndexPage(){
             <Head>
                 <title>Cookie Stand Admin</title>
             </Head>
-                
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SX60M6MWJD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
