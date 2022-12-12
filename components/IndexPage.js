@@ -8,15 +8,6 @@ export default function IndexPage(){
             <Head>
                 <title>Cookie Stand Admin</title>
             </Head>
-                
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX60M6MWJD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SX60M6MWJD');
-</script>
         </div>
 
 
